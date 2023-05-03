@@ -32,23 +32,28 @@ export const DogListContainer = () => {
     console.log('selectedBreed');
     console.log(selectedBreed);
 
-    fetch(`https://dog.ceo/api/breed/${selectedBreed}/images/random/1`)
+    fetch(`https://dog.ceo/api/breed/${selectedBreed}/images/random/5`)
       .then(function (response) {
         return response.json();
       })
       .then(function (json) {
         console.log('getSelectedBreed');
         console.log(json);
-        setBreedDogUrl(json);
+        console.log('json.message');
+        console.log(json.message);
+        setBreedDogUrl(json.message);
       });
   };
 
   // 選択した犬種の一覧イメージを表示
   var breedDogUrlList = [];
   breedDogUrlList = breedDogUrl;
-  breedDogUrlList = breedDogUrlList?.map((dogUrl, index) => (
-    <li key={index}>{<img src={dogUrl}></img>}</li>
-  ));
+  // breedDogUrlList = breedDogUrlList?.map((dogUrl, index) => (
+  //   <li key={index}>{<img src={dogUrl}></img>}</li>
+  // ));
+  // breedDogUrlList = breedDogUrlList?.map((dogUrl, index) => (
+  //   <li key={index}>{<img src={dogUrl}></img>}</li>
+  // ));
 
   return (
     <>
@@ -60,12 +65,12 @@ export const DogListContainer = () => {
       <button className="displayButton" onClick={getSelectedBreed}>
         表示
       </button>
-      {breedDogUrlList}
-      {/* <ul>
-        {breedDogUrl.map((dogUrl, index) => (
+      {/* {breedDogUrlList} */}
+      <ul>
+        {breedDogUrlList?.map((dogUrl, index) => (
           <li key={index}>{<img src={dogUrl}></img>}</li>
         ))}
-      </ul> */}
+      </ul>
     </>
   );
 };
